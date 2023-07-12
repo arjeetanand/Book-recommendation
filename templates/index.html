@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Movie Recommender</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #272932;
+          }
+          
+          h1 {
+            text-align: center;
+            margin-top: 50px;
+            color: #E7ECEF;
+          }
+          
+          form {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #E7ECEF;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+          }
+          
+          label {
+            font-weight: bold;
+            color: #555;
+          }
+          
+          select,
+          input[type="number"],
+          input[type="checkbox"] {
+            margin-bottom: 10px;
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+          }
+          
+          input[type="submit"] {
+            display: block;
+            margin: 0 auto;
+            background-color: #F05D5E;
+            color: #E7ECEF;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+          }
+          
+          #genreSelection label {
+            display: block;
+            margin-top: 10px;
+            color: #555;
+          }
+          
+          
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Movie Recommender</h1>
+    <form method="POST" action="/">
+        <label for="categorySelect">Select Category:</label>
+        <select name="categorySelect" id="categorySelect">
+            <option value="Movie based">Movie based</option>
+            <option value="Genre based">Genre based</option>
+        </select>
+        <br><br>
+        <div id="movieSelection">
+            <label for="movieSelect">Select Movie:</label>
+            <select name="movieSelect" id="movieSelect">
+                <option value="--Select--">--Select--</option>
+                {% for movie in movies %}
+                <option value="{{ movie }}">{{ movie }}</option>
+                {% endfor %}
+            </select>
+            <br><br>
+            <label for="noOfRecommendations">Number of Recommendations:</label>
+            <input type="number" name="noOfRecommendations" id="noOfRecommendations" min="1" max="10" value="5">
+        </div>
+        <div id="genreSelection" style="display:none;">
+            <label for="genres">Select Genres:</label>
+            <br>
+            {% for genre in genres %}
+            <input type="checkbox" name="genres" value="{{ genre }}">{{ genre }}
+            {% endfor %}
+            <br><br>
+            <label for="imdbScore">Minimum IMDb Score:</label>
+            <input type="number" name="imdbScore" id="imdbScore" min="1" max="10" value="7">
+            <br><br>
+            <label for="noOfRecommendations">Number of Recommendations:</label>
+            <input type="number" name="noOfRecommendations" id="noOfRecommendations" min="1" max="10" value="5">
+        </div>
+        <br><br>
+        <input type="submit" value="Submit">
+    </form>
+    <script>
+        var categorySelect = document.getElementById('categorySelect');
+        var movieSelection = document.getElementById('movieSelection');
+        var genreSelection = document.getElementById('genreSelection');
+
+        categorySelect.addEventListener('change', function() {
+            if (categorySelect.value === 'Movie based') {
+                movieSelection.style.display = 'block';
+                genreSelection.style.display = 'none';
+            } else if (categorySelect.value === 'Genre based') {
+                movieSelection.style.display = 'none';
+                genreSelection.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>
