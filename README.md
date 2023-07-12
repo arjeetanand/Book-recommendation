@@ -1,4 +1,4 @@
-# Movie Recommendation🍿 System
+# Movie Recommendation System
 
 ## Source
 - [IMDB Movie 5000 Dataset](https://www.kaggle.com/carolzhangdc/imdb-5000-movie-dataset)
